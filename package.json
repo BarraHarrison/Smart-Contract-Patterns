@@ -23,6 +23,9 @@
   "homepage": "https://github.com/BarraHarrison/Smart-Contract-Patterns#readme",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
-    "hardhat": "^3.0.15"
+    "hardhat": "^2.27.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0"
   }
 }
