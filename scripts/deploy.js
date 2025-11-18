@@ -12,3 +12,7 @@ async function main() {
     console.log("TipJarOwnable deployed to:", await tipJar.getAddress());
 }
 
+main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+});
