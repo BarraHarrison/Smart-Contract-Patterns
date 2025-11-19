@@ -51,17 +51,10 @@ contract TipJarOwnable is Ownable {
         emit TipReceived(msg.sender, msg.value, "No message");
     }
 
-    /**
-     * @notice Get total number of tips ever sent.
-     */
     function getTotalTips() external view returns (uint256) {
         return tips.length;
     }
 
-    /**
-     * @notice Withdraw all funds in the contract to the owner.
-     * Only the owner can call this.
-     */
     function withdraw() external onlyOwner {
         uint256 balance = address(this).balance;
         require(balance > 0, "No funds available");
@@ -72,9 +65,6 @@ contract TipJarOwnable is Ownable {
         emit Withdraw(owner(), balance);
     }
 
-    /**
-     * @notice Check the current ETH balance in the tip jar.
-     */
     function getBalance() external view returns (uint256) {
         return address(this).balance;
     }
