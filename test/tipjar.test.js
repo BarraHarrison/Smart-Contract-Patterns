@@ -62,10 +62,9 @@ describe("TipJarOwnable", function () {
         const ownerBalanceAfter = await ethers.provider.getBalance(owner.address);
 
         const total = tip1 + tip2;
+        const expectedBalance = ownerBalanceBefore + total - gasUsed;
 
-        expect(ownerBalanceAfter).to.equal(
-            ownerBalanceBefore + total - gasUsed
-        );
+        expect(ownerBalanceAfter).to.equal(expectedBalance);
 
         expect(await tipJar.getBalance()).to.equal(0n);
     });
