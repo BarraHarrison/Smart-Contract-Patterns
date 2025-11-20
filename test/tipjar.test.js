@@ -64,7 +64,7 @@ describe("TipJarOwnable", function () {
         const total = tip1 + tip2;
         const expectedBalance = ownerBalanceBefore + total - gasUsed;
 
-        expect(ownerBalanceAfter).to.equal(expectedBalance);
+        expect(BigInt(ownerBalanceAfter)).to.equal(BigInt(expectedBalance));
 
         expect(await tipJar.getBalance()).to.equal(0n);
     });
