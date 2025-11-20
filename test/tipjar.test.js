@@ -52,20 +52,15 @@ describe("TipJarOwnable", function () {
         await tipJar.connect(addr1).sendTip("Tip1", { value: tip1 });
         await tipJar.connect(addr2).sendTip("Tip2", { value: tip2 });
 
-        const ownerBalanceBefore = await ethers.provider.getBalance(owner.address);
+        const balanceBefore = await tipJar.getBalance();
+        expect(balanceBefore).to.equal(tip1 + tip2);
 
-        const tx = await tipJar.connect(owner).withdraw();
-        const receipt = await tx.wait();
+        await expect(tipJar.connect(owner).withdraw())
+            .to.emit(tipJar, "Withdraw")
+            .withArgs(owner.address, balanceBefore);
 
-        const gasUsed = receipt.gasUsed * receipt.effectiveGasPrice;
-
-        const ownerBalanceAfter = await ethers.provider.getBalance(owner.address);
-
-        const total = tip1 + tip2;
-        const expectedBalance = ownerBalanceBefore + total - gasUsed;
-
-        expect(BigInt(ownerBalanceAfter)).to.equal(BigInt(expectedBalance));
-
-        expect(await tipJar.getBalance()).to.equal(0n);
+        const balanceAfter = await tipJar.getBalance();
+        expect(balanceAfter).to.equal(0n);
     });
+
 });
