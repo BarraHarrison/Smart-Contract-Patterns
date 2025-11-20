@@ -39,8 +39,8 @@ describe("TipJarOwnable", function () {
 
         await tipJar.connect(addr1).sendTip("Test", { value: tipAmount });
 
-        await expect(tipjar.connect(other).withdraw()).to.be.revertedWithCustomError
-            (tipjar, "OwnableUnauthorizedAccount");
+        await expect(tipJar.connect(addr1).withdraw()).to.be.revertedWithCustomError
+            (tipJar, "OwnableUnauthorizedAccount");
 
         await expect(tipJar.connect(owner).withdraw()).not.to.be.reverted;
     });
